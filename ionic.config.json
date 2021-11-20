@@ -1,0 +1,7 @@
+{
+  "name": "devlogin",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
