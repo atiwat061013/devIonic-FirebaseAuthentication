@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ionic Forms</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="signinForm" (ngSubmit)="submitsigninForm()" novalidate>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email" ></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+      Email is required.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+      Please provide valid email id.
+    </span>
+    <ion-item lines="full">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input maxlength="10" formControlName="password" type="password" required></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+      Password is required.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.pattern">
+      Please provide valid email id.
+    </span>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" expand="block">signeUp</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+  <ion-row class="ion-text-center">
+    <ion-col size="12">
+      <p>Don't have an account? <a (click)="onSignup()">Register Now</a></p>
+    </ion-col>
+  </ion-row>
+</ion-content>
