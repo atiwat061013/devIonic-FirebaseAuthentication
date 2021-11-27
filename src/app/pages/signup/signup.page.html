@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Ionic Forms</ion-title>
+    <ion-title>Sign Up</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -47,18 +47,18 @@
 
     <ion-item lines="full">
       <ion-label position="floating">Password</ion-label>
-      <ion-input maxlength="10" formControlName="mobile" type="text" required></ion-input>
+      <ion-input formControlName="password" type="text" required></ion-input>
     </ion-item>
-    <!-- <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.required">
-      Mobile number is required.
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+      Password number is required.
     </span>
-    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.pattern">
-      Only numerical values allowed.
-    </span> -->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.minlength">
+      Name should be min 6 chars long.
+    </span>
 
     <ion-row>
       <ion-col>
-        <ion-button type="submit" expand="block">signeUp</ion-button>
+        <ion-button type="submit" expand="block" color="success">Sign Up</ion-button>
       </ion-col>
     </ion-row>
   </form>

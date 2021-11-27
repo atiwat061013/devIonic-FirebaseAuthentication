@@ -5,6 +5,7 @@ import { getDatabase, ref, child, get, set } from "firebase/database";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -18,7 +19,8 @@ export class SignupPage implements OnInit {
   auth = getAuth();
 
   db = getDatabase();
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder,
+    private modalCtrl: ModalController) {
 
   }
   ngOnInit() {
@@ -28,23 +30,9 @@ export class SignupPage implements OnInit {
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       // dob: [this.defaultDate],
-      mobile: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
+      mobile: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     })
-
-
-    set(ref(this.db, 'users/' + "0000"), {
-      username: "atiwat",
-      email: "ati_wat@hotmail.com",
-    })
-      .then(() => {
-        // Data saved successfully!
-        console.log('Data saved successfully!');
-
-      })
-      .catch((error) => {
-        // The write failed...
-        console.log('error', error);
-      });
   }
 
   // getDate(e) {
@@ -66,13 +54,28 @@ export class SignupPage implements OnInit {
     } else {
       console.log(this.signUpForm.value)
 
-      createUserWithEmailAndPassword(this.auth,this.signUpForm.value.email, "123456")
+      createUserWithEmailAndPassword(this.auth,this.signUpForm.value.email, this.signUpForm.value.password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
         console.log('user', user);
-        
-        // ...
+
+        set(ref(this.db, `users/${user.uid}`), {
+          name: this.signUpForm.value.name,
+          email: this.signUpForm.value.email,
+          mobile: this.signUpForm.value.mobile,
+        })
+          .then(() => {
+            // Data saved successfully!
+            console.log('Data saved successfully!');
+            this.modalCtrl.dismiss();
+    
+          })
+          .catch((error) => {
+            // The write failed...
+            console.log('error', error);
+          });
+      
       })
       .catch((error) => {
         const errorCode = error.code;
