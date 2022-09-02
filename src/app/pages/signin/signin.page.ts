@@ -123,12 +123,4 @@ export class SigninPage implements OnInit {
       }
     }, err => console.error(err));
   }
-
-  runApp(): void {
-    const idToken = liff.getIDToken();
-    liff.getProfile().then(profile => {
-      console.log(profile);
-    }).catch(err => console.error(err));
-  }
-
 }
