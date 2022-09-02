@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
     }).catch(err => console.error(err));
   }
 
-  logout(): void {
+  onClogoutlick(): void {
     liff.logout();
     window.location.reload();
   }
