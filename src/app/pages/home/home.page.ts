@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import liff from '@line/liff';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-home',
@@ -13,26 +13,20 @@ export class HomePage implements OnInit {
   statusMessage: any;
   userId: any;
 
-  constructor() { }
+  constructor(
+    private dataService: DataService,
+  ) { }
 
   ngOnInit() {
-  }
-
-  runApp(): void {
-    const idToken = liff.getIDToken();
-    this.idToken = idToken;
-    liff.getProfile().then(profile => {
-      console.log(profile);
-      this.displayName = profile.displayName;
-      this.pictureUrl = profile.pictureUrl;
-      this.statusMessage = profile.statusMessage;
-      this.userId = profile.userId;
-    }).catch(err => console.error(err));
+    this.idToken = this.dataService.idToken;
+    this.displayName = this.dataService.displayName;
+    this.pictureUrl = this.dataService.pictureUrl;
+    this.statusMessage = this.dataService.statusMessage;
+    this.userId = this.dataService.userId;
   }
 
   onClogoutlick(): void {
-    liff.logout();
-    window.location.reload();
+    this.dataService.logout();
   }
 
 }

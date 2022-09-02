@@ -10,7 +10,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { SignupPage } from '../signup/signup.page';
-import liff from '@line/liff';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-signin',
@@ -28,6 +28,7 @@ export class SigninPage implements OnInit {
     public formBuilder: FormBuilder,
     private loaderService: LoaderService,
     private alertService: AlertService,
+    private dataService: DataService,
     private router: Router,
     public modalCtrl: ModalController
   ) {}
@@ -111,16 +112,7 @@ export class SigninPage implements OnInit {
   async onSignupWithLine() {
     // window.open(this.winUrl);
     
-    this.initLine();
+    this.dataService.initLine();
   }
 
-  initLine(): void {
-    liff.init({ liffId: '1657440626-wkakxpGA' }, () => {
-      if (liff.isLoggedIn()) {
-        this.router.navigateByUrl('home');
-      } else {
-        liff.login();
-      }
-    }, err => console.error(err));
-  }
 }
