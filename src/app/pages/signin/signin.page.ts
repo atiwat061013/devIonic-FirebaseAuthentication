@@ -10,6 +10,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { SignupPage } from '../signup/signup.page';
+import liff from '@line/liff';
 
 @Component({
   selector: 'app-signin',
@@ -107,4 +108,27 @@ export class SigninPage implements OnInit {
 
     return await modal.present(); 
   }
+  async onSignupWithLine() {
+    // window.open(this.winUrl);
+    
+    this.initLine();
+  }
+
+  initLine(): void {
+    liff.init({ liffId: '1657440626-wkakxpGA' }, () => {
+      if (liff.isLoggedIn()) {
+        this.router.navigateByUrl('home');
+      } else {
+        liff.login();
+      }
+    }, err => console.error(err));
+  }
+
+  runApp(): void {
+    const idToken = liff.getIDToken();
+    liff.getProfile().then(profile => {
+      console.log(profile);
+    }).catch(err => console.error(err));
+  }
+
 }
