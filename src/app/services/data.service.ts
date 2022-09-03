@@ -35,7 +35,7 @@ export class DataService {
     await this.lineLiff.init({ liffId: '1657440626-wkakxpGA' }, async () => {
       if (this.lineLiff.isLoggedIn()) { 
         await this.getProfile();
-        this.router.navigateByUrl('home');
+        // this.router.navigateByUrl('home');
       } else {
         //test local
         // this.lineLiff.login({redirectUri: 'https://192.168.0.105:8100/home'});
