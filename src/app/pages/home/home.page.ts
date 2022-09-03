@@ -23,7 +23,7 @@ export class HomePage implements OnInit {
     this.profile = await JSON.parse(localStorage.getItem("profile"));
     this.idToken = localStorage.getItem("idToken");
    
-    console.log("[ngOnInit] ", "profile "+ this.profile.displayName );
+    console.log("[ngOnInit] ", "profile "+ this.profile?.displayName );
   }
 
   onClogoutlick(): void {
