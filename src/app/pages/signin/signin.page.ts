@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { SignupPage } from '../signup/signup.page';
 import { DataService } from 'src/app/services/data.service';
+import liff from '@line/liff';
 
 @Component({
   selector: 'app-signin',

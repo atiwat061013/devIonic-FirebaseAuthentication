@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
+import liff from '@line/liff';
 
 @Component({
   selector: 'app-home',
@@ -8,21 +9,21 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class HomePage implements OnInit {
   idToken: any;
-  displayName: any;
-  pictureUrl: any;
-  statusMessage: any;
-  userId: any;
+
+  profile: any;
 
   constructor(
     private dataService: DataService,
-  ) { }
+  ) {
+    
+  }
 
-  ngOnInit() {
-    this.idToken = this.dataService.idToken;
-    this.displayName = this.dataService.displayName;
-    this.pictureUrl = this.dataService.pictureUrl;
-    this.statusMessage = this.dataService.statusMessage;
-    this.userId = this.dataService.userId;
+  async ngOnInit() {
+    await this.dataService.initLine();
+    this.profile = await JSON.parse(localStorage.getItem("profile"));
+    this.idToken = localStorage.getItem("idToken");
+   
+    console.log("[ngOnInit] ", "profile "+ this.profile.displayName );
   }
 
   onClogoutlick(): void {

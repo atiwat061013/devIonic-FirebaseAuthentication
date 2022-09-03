@@ -7,11 +7,11 @@
 <ion-content>
   <h1>Angular with LINE Login</h1>
   <hr>
-  <img [src]="pictureUrl" width="300px" height="300px"/>
+  <img [src]="profile?.pictureUrl" width="300px" height="300px"/>
   <p style="text-align: left; margin-left: 20%;"><b>id token: </b> {{ idToken }}</p>
-  <p style="text-align: left; margin-left: 20%;"><b>display name: </b> {{ displayName }}</p>
-  <p style="text-align: left; margin-left: 20%;"><b>status message: </b> {{ statusMessage }}</p>
-  <p style="text-align: left; margin-left: 20%;"><b>user id: </b> {{ userId }}</p>
+  <p style="text-align: left; margin-left: 20%;"><b>display name: </b> {{ profile?.displayName }}</p>
+  <p style="text-align: left; margin-left: 20%;"><b>status message: </b> {{ profile?.statusMessage }}</p>
+  <p style="text-align: left; margin-left: 20%;"><b>user id: </b> {{ profile?.userId }}</p>
 
   <ion-button (click)="onClogoutlick()" expand="block" fill="clear" shape="round">
     Logout
